@@ -53,7 +53,7 @@ export default function SearchForm() {
 
                             <Link href={`/recipe/${recipe.id}`}>{recipe.title}</Link>
 
-                            <P>you have {recipe.usedIngredientCount} but you're missing {recipe.missedIngredientCount}</P>
+                            <p>you have {recipe.usedIngredientCount} but you're missing {recipe.missedIngredientCount}</p>
 
                             <p>missing: {recipe.missedIngredients.map((item) => item.name).join(", ")}</p>
 

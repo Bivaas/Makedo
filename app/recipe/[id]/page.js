@@ -15,8 +15,21 @@ export default async function RecipePage({ params }) {
         <main>
 
             <h1>{recipe.title}</h1>
+
+            <img src={recipe.image} alt={recipe.title}/>
+
             <p>ready in {recipe.readyInMinutes} minutes</p>
             <p>serves {recipe.servings}</p>
+
+            <h2>Ingredients</h2>
+            <ol>
+
+                {recipe.extendedIngredients.map((ingredient, index) => (
+
+                    <li key= {index}>{ingredient.original}</li>
+                ))}
+
+            </ol>
 
         </main>
 
