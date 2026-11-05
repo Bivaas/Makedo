@@ -35,6 +35,16 @@ export default async function RecipePage({ params }) {
 
             </ol>
 
+            <h2>Steps:</h2>
+            <ol>
+
+                {recipe.analyzedInstructions.flatMap((group) => group.steps).map((step, index) => (
+
+                    <li key={index}>{step.step}</li>
+                ))}
+
+            </ol>
+
         </main>
 
     );

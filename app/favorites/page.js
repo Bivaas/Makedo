@@ -17,6 +17,7 @@ export default function FavouritesPage() {
         <main>
 
             <h1>Favourites:</h1>
+            {favorites.length === 0 && <p>No favourites yet!</p>}
 
             <ul>
 
