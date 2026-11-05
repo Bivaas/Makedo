@@ -1,3 +1,5 @@
+import Favourites from "../../Favourites";
+
 export const instant = false;
 
 const RECIPE = "https://api.spoonacular.com/recipes";
@@ -20,6 +22,8 @@ export default async function RecipePage({ params }) {
 
             <p>ready in {recipe.readyInMinutes} minutes</p>
             <p>serves {recipe.servings}</p>
+
+            <Favourites id={recipe.id} title={recipe.title} />
 
             <h2>Ingredients</h2>
             <ol>
