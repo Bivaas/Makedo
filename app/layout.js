@@ -2,6 +2,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 
+import { ClerkProvider, Show, SignInButton, UserButton } from "@clerk/nextjs";
+import { Suspense } from "react";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -26,15 +29,29 @@ export default function RootLayout({ children }) {
       
       <body className="min-h-full flex flex-col mx-auto w-full max-w-2xl px-4 py-8">
 
+        <ClerkProvider>
+
         <nav className="flex gap-7 border-b pb-4 mb-8">
 
             <a href="/" className="font-bold px-2">Makedo</a>
             <a href="/favorites" className="hover: underline">Favourites</a>
 
+            <div className="ml-auto">
+
+                <Suspense>
+
+                  <Show when="signed-out"><SignInButton /></Show>
+                  <Show when="signed-in"><UserButton /></Show>
+
+                </Suspense>
+
+            </div>
         </nav>
 
         {children}
         <Toaster />
+
+        </ClerkProvider>
 
       </body>
 

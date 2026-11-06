@@ -5,6 +5,8 @@ Find recipes of your fav food item.
 ## Used
 
 - react-hot-toast
+- clerk
+- spoonacular
 
 
 ## Getting Started
