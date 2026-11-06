@@ -3,6 +3,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import Link from "next/link";
+import SwapButton from "./SwapButton";
 
 
 export default function SearchForm() {
@@ -53,9 +54,16 @@ export default function SearchForm() {
 
                             <Link href={`/recipe/${recipe.id}`}>{recipe.title}</Link>
 
+                            {/* missing ingredients */}
                             <p>you have {recipe.usedIngredientCount} but you're missing {recipe.missedIngredientCount}</p>
 
                             <p>missing: {recipe.missedIngredients.map((item) => item.name).join(", ")}</p>
+
+                            {/* swap btn */}
+                            {recipe.missedIngredients.map((item, index) => (
+
+                                <SwapButton key={index} ingredient={item.name} />
+                            ))}
 
                         </li>
 
