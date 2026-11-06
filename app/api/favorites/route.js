@@ -16,9 +16,10 @@ export async function POST(request) {
     const { id, title } = await request.json();
 
     const collection = client.db("makedo").collection("favorites");
-    await collection.insertOne({ id, title, userId });
 
-    return Response.json({ success: true });
+    const result = await collection.updateOne({ id, userId }, { $set: { title}}, { upsert: true});
+
+    return Response.json({ added: result.upsertedCount === 1 });
 }
 
 
