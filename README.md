@@ -28,3 +28,6 @@ You can start editing the page by modifying `app/page.js`. The page auto-updates
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
 
+## Use of AI
+
+I used AI during initial planning of the project to see how difficult or simple the project can be. It then recommended for me to use spoonacular API. I have also used AI for debugging, fixing error and getting project feedback.
