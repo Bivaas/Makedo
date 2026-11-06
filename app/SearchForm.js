@@ -8,6 +8,8 @@ import SwapButton from "./SwapButton";
 
 export default function SearchForm() {
 
+    const [dish, setDish] = useState("");
+
     const [ingredients, setIngredients] = useState("");
     const [recipes, setRecipes] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -18,7 +20,7 @@ export default function SearchForm() {
         event.preventDefault();
         setLoading(true);
 
-        const res = await fetch(`/api/search?ingredients=${ingredients}`);
+        const res = await fetch(`/api/search?ingredients=${ingredients}&dish=${dish}`);
         const data = await res.json();
         setLoading(false);
 
@@ -29,7 +31,7 @@ export default function SearchForm() {
             return;
         } 
 
-        setRecipes(data);
+        setRecipes(data.results);
         setSearched(true);
     }
 
@@ -37,6 +39,14 @@ export default function SearchForm() {
 
         <form onSubmit={handleSubmit}>
 
+            {/* dish name */}
+            <input value={dish} onChange={( event ) =>
+
+                setDish(event.target.value)}
+                    placeholder="dish you wanna make (optional)"
+                    className="block w-72 border rounded px-3 py-2 mb-2" />
+
+            {/* ingredients */}
             <input value={ingredients} onChange={(event) =>
 
                 setIngredients(event.target.value)}

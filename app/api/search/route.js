@@ -1,14 +1,14 @@
 const SPOONACULAR_URL = "https://api.spoonacular.com/recipes/findByIngredients";
 
 const RESULTS = 10;
-const RANKING = 2
 
 
 export async function GET(request) {
 
     const ingredients = request.nextUrl.searchParams.get("ingredients");
+    const dish = request.nextUrl.searchParams.get("dish");
     
-    const url = `${SPOONACULAR_URL}?ingredients=${ingredients}&number=${RESULTS}&ranking=${RANKING}&apiKey=${process.env.SPOONACULAR_API_KEY}`;
+    const url = `${SPOONACULAR_URL}?includeingredients=${ingredients}&fillIngredients=true&sort=min-missing-ingredients&number=${RESULTS}&&apiKey=${process.env.SPOONACULAR_API_KEY}`;
 
     const res = await fetch(url);
 
