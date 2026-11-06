@@ -29,9 +29,11 @@ export default function SwapButton({ ingredient}) {
 
         <div>
 
-            <button type="button" onClick={handleClick}>swap {ingredient}</button>
-            {loading && <p>thinking.....</p>}
-            <p>{swaps}</p>
+            <button type="button" onClick={handleClick} className="mt-3 text-sm border rounded px-3 py-1 cursor-pointer" >swap {ingredient}</button>
+
+            {loading && <p className="mt-2 text-sm" >thinking.....</p>}
+
+            <p className="mt-2 text-sm whitespace-pre-line">{swaps}</p>
 
         </div>
     );

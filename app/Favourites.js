@@ -21,5 +21,5 @@ export default function Favourites({ id, title }) {
         toast.success("saved to favorites!");
     }
 
-    return <button onClick={handleClick}>save to favorites</button>
+    return <button onClick={handleClick} className="mt-4 border rounded px-4 py-2 font-sm" >save to favorites</button>
 }

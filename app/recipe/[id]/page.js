@@ -16,17 +16,19 @@ export default async function RecipePage({ params }) {
 
         <main>
 
-            <h1>{recipe.title}</h1>
+            <h1 className="text-3xl font-bold mb-4">{recipe.title}</h1>
 
-            <img src={recipe.image} alt={recipe.title}/>
+            <img src={recipe.image} alt={recipe.title} className="w-full rounded mb-4"/>
 
             <p>ready in {recipe.readyInMinutes} minutes</p>
             <p>serves {recipe.servings}</p>
 
             <Favourites id={recipe.id} title={recipe.title} />
 
-            <h2>Ingredients</h2>
-            <ol>
+            {/* ingredients */}
+            <h2 className="text-xl mt-8 mb-4 font-semibold">Ingredients</h2>
+
+            <ol className="list-decimal pl-6 space-y-1">
 
                 {recipe.extendedIngredients.map((ingredient, index) => (
 
@@ -35,8 +37,10 @@ export default async function RecipePage({ params }) {
 
             </ol>
 
-            <h2>Steps:</h2>
-            <ol>
+            {/* steps */}
+            <h2 className="text-xl mt-7 mb-4 font-semibold">Steps:</h2>
+
+            <ol className="list-decimal pl-6 space-y-1">
 
                 {recipe.analyzedInstructions.flatMap((group) => group.steps).map((step, index) => (
 

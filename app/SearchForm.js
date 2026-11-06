@@ -40,7 +40,7 @@ export default function SearchForm() {
             <input value={ingredients} onChange={(event) =>
 
                 setIngredients(event.target.value)}
-                placeholder="eggs, tomato, cheese"
+                placeholder="ingredients you have"
                 className="w-72 border rounded px-3 py-2" />
 
             <button type="submit" className="ml-2 border rounded px-4 py-2" >Search</button>

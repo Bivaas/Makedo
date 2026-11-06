@@ -16,15 +16,15 @@ export default function FavouritesPage() {
 
         <main>
 
-            <h1>Favourites:</h1>
+            <h1 className="text-3xl font-bold mb-6">Favourites:</h1>
             {favorites.length === 0 && <p>No favourites yet!</p>}
 
-            <ul>
+            <ul className="space-y-3">
 
                 {favorites.map((favorite) => (
                     
                     <li key={favorite.id}>
-                        <a href = {`/recipe/${favorite.id}`}>{favorite.title}</a>
+                        <a href = {`/recipe/${favorite.id}`}  className="text-lg hover:underline">{favorite.title}</a>
                     </li>
                 ))}
 

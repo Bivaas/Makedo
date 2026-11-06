@@ -14,8 +14,8 @@ export async function GET(request) {
         body: JSON.stringify({
 
             model: "nvidia/nemotron-3.5-lightning-30b-a3b",
-            messages: [{ role: "user", content: `suggest 2 common cooking substitutes and steps for ${ingredient} in very short`}],
-            max_tokens: 1000,
+            messages: [{ role: "user", content: `suggest 2 common cooking substitutes and steps for ${ingredient} in very short and plain text only!`}],
+            max_tokens: 4000,
         }),
     } );
 
