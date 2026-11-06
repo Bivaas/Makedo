@@ -9,8 +9,10 @@ export default function FavouritesPage() {
 
     useEffect(() => {
 
-        setFavorites(JSON.parse(localStorage.getItem("favorites") || "[]"));
-    }, []);
+        fetch("/api/favorites")
+            .then((res) => res.json())
+            .then((data) => setFavorites(data));
+    })
 
     return (
 

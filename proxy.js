@@ -1,6 +1,6 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 
-const isProtected = createRouteMatcher(["/favorites"]);
+const isProtected = createRouteMatcher(["/favorites", "/api/favorites"]);
 
 // protect endpoint
 export default clerkMiddleware(async (auth, req) => {

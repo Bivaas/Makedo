@@ -7,6 +7,7 @@ Find recipes of your fav food item.
 - react-hot-toast
 - clerk
 - spoonacular
+- MongoDB
 
 
 ## Getting Started
