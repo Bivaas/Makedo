@@ -40,24 +40,26 @@ export default function SearchForm() {
             <input value={ingredients} onChange={(event) =>
 
                 setIngredients(event.target.value)}
-                placeholder="eggs, tomato, cheese" />
+                placeholder="eggs, tomato, cheese"
+                className="w-72 border rounded px-3 py-2" />
 
-            <button type="submit">Search</button>
+            <button type="submit" className="ml-2 border rounded px-4 py-2" >Search</button>
 
-            {loading && <p>Searching...</p>}
-            {searched && !loading && recipes.length === 0 && <p>no recipes found... try different ingredients </p>}
+            {loading && <p className="mt-4">Searching...</p>}
 
-            <ul>
+            {searched && !loading && recipes.length === 0 && <p className="mt-5">no recipes found... try different ingredients </p>}
+
+            <ul className="mt-8 space-y-6">
                 {recipes.map((recipe) => (
                     
-                        <li key={recipe.id}>
+                        <li key={recipe.id} className="border-b pb-6">
 
-                            <Link href={`/recipe/${recipe.id}`}>{recipe.title}</Link>
+                            <Link href={`/recipe/${recipe.id}`} className="text-lg">{recipe.title}</Link>
 
                             {/* missing ingredients */}
-                            <p>you have {recipe.usedIngredientCount} but you're missing {recipe.missedIngredientCount}</p>
+                            <p className="mt-1 text-sm">you have {recipe.usedIngredientCount} but you're missing {recipe.missedIngredientCount}</p>
 
-                            <p>missing: {recipe.missedIngredients.map((item) => item.name).join(", ")}</p>
+                            <p className="text-sm">missing: {recipe.missedIngredients.map((item) => item.name).join(", ")}</p>
 
                             {/* swap btn */}
                             {recipe.missedIngredients.map((item, index) => (

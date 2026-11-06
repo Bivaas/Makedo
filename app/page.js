@@ -7,7 +7,7 @@ export default function Home() {
 
     <main>
 
-        <h1>Makedo</h1>
+        <h1 className="text-3xl font-bold mb-6">Makedo</h1>
         <SearchForm />
 
     </main>

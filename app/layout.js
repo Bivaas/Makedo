@@ -24,10 +24,13 @@ export default function RootLayout({ children }) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col mx-auto w-full max-w-2xl px-4 py-8">
 
-        <nav>
-            <a href="/">Makedo</a> | <a href="/favorites">Favourites</a>
+        <nav className="flex gap-7 border-b pb-4 mb-8">
+
+            <a href="/" className="font-bold px-2">Makedo</a>
+            <a href="/favorites" className="hover: underline">Favourites</a>
+
         </nav>
 
         {children}
