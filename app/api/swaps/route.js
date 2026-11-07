@@ -1,6 +1,7 @@
 export async function GET(request) {
 
     const ingredient = request.nextUrl.searchParams.get("ingredient");
+    const avoid = request.nextUrl.searchParams.get("avoid");
 
     const res = await fetch("https://integrate.api.nvidia.com/v1/chat/completions", {
 
@@ -14,7 +15,8 @@ export async function GET(request) {
         body: JSON.stringify({
 
             model: "nvidia/nemotron-3.5-lightning-30b-a3b",
-            messages: [{ role: "user", content: `suggest 2 common cooking substitutes and steps for ${ingredient} in very short and plain text only!`}],
+
+            messages: [{ role: "user", content: `suggest 2 common cooking substitutes and steps for ${ingredient} in very short. Never suggest anything containing: ${avoid}. Your all response should be in plain text only`}],
             max_tokens: 4000,
         }),
     } );

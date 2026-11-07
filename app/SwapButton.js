@@ -4,7 +4,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 
-export default function SwapButton({ ingredient}) {
+export default function SwapButton ({ ingredient }) {
 
     const [swaps, setSwaps ] = useState("");
     const [loading, setLoading] = useState(false);
@@ -12,7 +12,7 @@ export default function SwapButton({ ingredient}) {
     async function handleClick() {
 
         setLoading(true);
-        const res = await fetch(`/api/swaps?ingredient=${ingredient}`);
+        const res = await fetch(`/api/swaps?ingredient=${ingredient}&avoid=${avoid}`);
         setLoading(false);
 
         if (!res.ok) {

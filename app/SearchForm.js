@@ -17,6 +17,7 @@ export default function SearchForm() {
     const [diet, setDiet] = useState("");
     const [exclude, setExclude] = useState("");
     const [allergies, setAllergies] = useState([]);
+    const [showSwaps, setShowSwaps] = useState(true);
 
     const [ingredients, setIngredients] = useState("");
     const [recipes, setRecipes] = useState([]);
@@ -94,6 +95,14 @@ export default function SearchForm() {
 
             </div>
 
+            {/* swap toggle */}
+            <label className="block mb-4 text-sm">
+
+                <input type="checkbox" checked={showSwaps} onChange={() => setShowSwaps(!showSwaps)} className="mr-1" />
+                swap suggestions
+
+            </label>
+
             {/* ingredients */}
             <input value={ingredients} onChange={(event) =>
 
@@ -120,9 +129,9 @@ export default function SearchForm() {
                             <p className="text-sm">missing: {recipe.missedIngredients.map((item) => item.name).join(", ")}</p>
 
                             {/* swap btn */}
-                            {recipe.missedIngredients.map((item, index) => (
-
-                                <SwapButton key={index} ingredient={item.name} />
+                            {showSwaps && recipe.missedIngredients.map((item, index) => (
+                                
+                                <SwapButton key={index} ingredient={item.name} avoid={[exclude, ...allergies].join(", ")}  />
                             ))}
 
                         </li>
