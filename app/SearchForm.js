@@ -5,24 +5,37 @@ import toast from "react-hot-toast";
 import Link from "next/link";
 import SwapButton from "./SwapButton";
 
+const ALLERGIES = [
+
+    "dairy", "egg", "gluten", "peanut", "tree nut", "seafood", "shellfish", "fish", "soy", "sesame", "wheat"
+];
+
 
 export default function SearchForm() {
 
     const [dish, setDish] = useState("");
     const [diet, setDiet] = useState("");
     const [exclude, setExclude] = useState("");
+    const [allergies, setAllergies] = useState([]);
 
     const [ingredients, setIngredients] = useState("");
     const [recipes, setRecipes] = useState([]);
     const [loading, setLoading] = useState(false);
     const [searched, setSearched] = useState(false);
 
+    function toggleAllergy(allergy) {
+
+        setAllergies(allergies.includes(allergy) ? allergies.filter((item) => 
+            item !== allergy) : [...allergies, allergy]);
+    }
+    
+
     async function handleSubmit(event) {
 
         event.preventDefault();
         setLoading(true);
 
-        const res = await fetch(`/api/search?ingredients=${ingredients}&dish=${dish}&diet=${diet}&exclude=${exclude}`);
+        const res = await fetch(`/api/search?ingredients=${ingredients}&dish=${dish}&diet=${diet}&exclude=${exclude}&allergies=${allergies.join(",")}`);
 
         const data = await res.json();
         setLoading(false);
@@ -65,6 +78,21 @@ export default function SearchForm() {
                 placeholder ="can't have ingredients in dish"
                 className ="block w-72 border rounded px-3 py-2 mb-2"
                 />
+
+            {/* allergy checkbox */}
+            <div className="mb-1 flex flex-wrap gap-3 text-sm">
+
+                    {ALLERGIES.map((allergy) => (
+                        <label key={allergy}>
+
+                            <input type="checkbox" checked={allergies.includes(allergy)} onChange={() => toggleAllergy(allergy)} className="mr-1" />
+
+                            {allergy}
+
+                        </label>
+                    ))}
+
+            </div>
 
             {/* ingredients */}
             <input value={ingredients} onChange={(event) =>
