@@ -1,9 +1,10 @@
 "use client"
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import SwapButton from "./SwapButton";
+import { useAuth } from "@clerk/nextjs";
 
 const ALLERGIES = [
 
@@ -23,6 +24,29 @@ export default function SearchForm() {
     const [recipes, setRecipes] = useState([]);
     const [loading, setLoading] = useState(false);
     const [searched, setSearched] = useState(false);
+    const { isSignedIn } = useAuth();
+
+
+    useEffect(() => {
+
+        if (!isSignedIn) return;
+
+        fetch("/api/preferences")
+            .then((res) => res.json())
+            .then((data) => {
+
+                setDiet(data.diet || "");
+                setExclude(data.eclude || "");
+                setAllergies(data.allergies || []);
+            });
+    }, [isSignedIn]);
+
+    async function savePreferences() {
+
+        await fetch("/api/preferences", { method: "POST", body: JSON.stringify({ diet, exclude, allergies }) });
+
+        toast.success("preferences saved!!");
+    }
 
     function toggleAllergy(allergy) {
 
@@ -103,6 +127,9 @@ export default function SearchForm() {
 
             </label>
 
+            {/* save preferences */}
+            {isSignedIn && <button type="button" onClick={savePreferences} className="mb-4 text-sm border rounded px-3 py-1 cursor-pointer">save preferences</button>}
+
             {/* ingredients */}
             <input value={ingredients} onChange={(event) =>
 
@@ -130,7 +157,7 @@ export default function SearchForm() {
 
                             {/* swap btn */}
                             {showSwaps && recipe.missedIngredients.map((item, index) => (
-                                
+
                                 <SwapButton key={index} ingredient={item.name} avoid={[exclude, ...allergies].join(", ")}  />
                             ))}
 

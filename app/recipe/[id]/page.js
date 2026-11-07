@@ -1,4 +1,5 @@
 import Favourites from "../../Favourites";
+import Servings from "../../Servings";
 
 export const instant = false;
 
@@ -21,21 +22,11 @@ export default async function RecipePage({ params }) {
             <img src={recipe.image} alt={recipe.title} className="w-full rounded mb-4"/>
 
             <p>ready in {recipe.readyInMinutes} minutes</p>
-            <p>serves {recipe.servings}</p>
 
+            
             <Favourites id={recipe.id} title={recipe.title} />
 
-            {/* ingredients */}
-            <h2 className="text-xl mt-8 mb-4 font-semibold">Ingredients</h2>
-
-            <ol className="list-decimal pl-6 space-y-1">
-
-                {recipe.extendedIngredients.map((ingredient, index) => (
-
-                    <li key= {index}>{ingredient.original}</li>
-                ))}
-
-            </ol>
+            <Servings servings={recipe.servings} ingredients={recipe.extendedIngredients} />
 
             {/* steps */}
             <h2 className="text-xl mt-7 mb-4 font-semibold">Steps:</h2>

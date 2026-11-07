@@ -4,7 +4,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 
-export default function SwapButton ({ ingredient }) {
+export default function SwapButton ({ ingredient, avoid }) {
 
     const [swaps, setSwaps ] = useState("");
     const [loading, setLoading] = useState(false);

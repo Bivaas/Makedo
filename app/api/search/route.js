@@ -8,7 +8,7 @@ export async function GET(request) {
     const allergies = request.nextUrl.searchParams.get("allergies");
 
     
-    const url = `https://api.spoonacular.com/recipes/findByIngredients?query=${dish}&includeIngredients=${ingredients}&diet=${diet}&excludeIngredients=${exclude}&intolerances=${allergies}&fillIngredients=true&sort=${SORT}&number=10&apiKey=${process.env.SPOONACULAR_API_KEY}`;
+    const url = `https://api.spoonacular.com/recipes/complexSearch?query=${dish}&includeIngredients=${ingredients}&diet=${diet}&excludeIngredients=${exclude}&intolerances=${allergies}&fillIngredients=true&sort=min-missing-ingredients&number=10&apiKey=${process.env.SPOONACULAR_API_KEY}`;
 
     const res = await fetch(url);
 
