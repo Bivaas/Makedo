@@ -9,6 +9,8 @@ import SwapButton from "./SwapButton";
 export default function SearchForm() {
 
     const [dish, setDish] = useState("");
+    const [diet, setDiet] = useState("");
+    const [exclude, setExclude] = useState("");
 
     const [ingredients, setIngredients] = useState("");
     const [recipes, setRecipes] = useState([]);
@@ -20,7 +22,8 @@ export default function SearchForm() {
         event.preventDefault();
         setLoading(true);
 
-        const res = await fetch(`/api/search?ingredients=${ingredients}&dish=${dish}`);
+        const res = await fetch(`/api/search?ingredients=${ingredients}&dish=${dish}&diet=${diet}&exclude=${exclude}`);
+
         const data = await res.json();
         setLoading(false);
 
@@ -45,6 +48,23 @@ export default function SearchForm() {
                 setDish(event.target.value)}
                     placeholder="dish you wanna make (optional)"
                     className="block w-72 border rounded px-3 py-2 mb-2" />
+
+            {/* dietary restriction */}
+            <select value={diet} onChange={(event) => setDiet(event.target.value)} className = "block border rounded px-3 py-2 mb-2">
+
+                <option value="">any diet</option>
+                <option value="vegetarian">vegetarian</option>
+                <option value="vegan">vegan</option>
+
+            </select>
+
+            {/* cant have food */}
+            <input value={exclude} onChange={(event) =>
+
+                setExclude(event.target.value)}
+                placeholder ="can't have ingredients in dish"
+                className ="block w-72 border rounded px-3 py-2 mb-2"
+                />
 
             {/* ingredients */}
             <input value={ingredients} onChange={(event) =>
