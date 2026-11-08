@@ -1,6 +1,8 @@
 # Makedo
 
-Find recipes of your fav food item.
+A recipe finder for when we open our fridge, see the available ingredients but don't know what to cook. You can type whatever raw ingredients you have, choose filters like vegetarian or vegan, allergies and ingredients you dont like to have. You will be shown 10 recipes (ranked first by most ingredients you have) and for missing ingredients, you have swap button where a very special AI will suggest the swap (alternative) for missing ingredient.
+
+You can also type a dish name you would want to make (like pizza) and if you like it, you could save it to favourites and your filter preference if you're signed in.
 
 ## Used
 
@@ -8,7 +10,7 @@ Find recipes of your fav food item.
 - clerk
 - spoonacular
 - MongoDB
-
+- color palette (https://coolors.co/palettes/popular/simple)
 
 ## Getting Started
 

@@ -137,7 +137,7 @@ export default function SearchForm() {
                 placeholder="ingredients you have"
                 className="w-72 border rounded px-3 py-2" />
 
-            <button type="submit" className="ml-2 border rounded px-4 py-2" >Search</button>
+            <button type="submit" className="ml-2 border rounded px-4 py-2 bg-[#e0afa0]">Search</button>
 
             {loading && <p className="mt-4">Searching...</p>}
 
