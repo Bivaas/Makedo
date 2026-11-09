@@ -19,6 +19,8 @@ export default function SearchForm() {
     const [exclude, setExclude] = useState("");
     const [allergies, setAllergies] = useState([]);
     const [showSwaps, setShowSwaps] = useState(true);
+    const [aiRecipe, setAiRecipe] = useState("");
+    const [aiLoading, setAiLoading] = useState(false);
 
     const [ingredients, setIngredients] = useState("");
     const [recipes, setRecipes] = useState([]);
@@ -54,11 +56,21 @@ export default function SearchForm() {
             item !== allergy) : [...allergies, allergy]);
     }
     
+    async function askAI() {
+        
+        setAiLoading(true);
+        const res = await fetch(`/api/ai-recipe?ingredients=${ingredients}&dish=${dish}&diet=${diet}&avoid=${[exclude, ...allergies].join(",")}`);
+
+        const data = await res.json();
+        setAiLoading(false);
+        setAiRecipe(data.recipe);
+    }
 
     async function handleSubmit(event) {
 
         event.preventDefault();
         setLoading(true);
+        setAiRecipe("")
 
         const res = await fetch(`/api/search?ingredients=${ingredients}&dish=${dish}&diet=${diet}&exclude=${exclude}&allergies=${allergies.join(",")}`);
 
@@ -142,6 +154,19 @@ export default function SearchForm() {
             {loading && <p className="mt-4">Searching...</p>}
 
             {searched && !loading && recipes.length === 0 && <p className="mt-5">no recipes found... try different ingredients </p>}
+
+            {/* AI */}
+            {searched && !!loading && recipe.length === 0 && (
+
+                <div className="mt-4">
+
+                    <button type="button" onClick={askAI} className="border rounded px-4 py-2 bg-[#e0afa0]">ask AI</button>
+
+                    {aiLoading && <p className="mt-2 text-sm">Ai is cooking something ....</p>}
+
+                    <p className="mt-4 whitespace-pre-line">{aiRecipe}</p>
+                </div>
+            )}
 
             <ul className="mt-8 space-y-6">
                 {recipes.map((recipe) => (
