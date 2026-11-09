@@ -19,14 +19,16 @@ export default function SearchForm() {
     const [exclude, setExclude] = useState("");
     const [allergies, setAllergies] = useState([]);
     const [showSwaps, setShowSwaps] = useState(true);
-    const [aiRecipe, setAiRecipe] = useState("");
-    const [aiLoading, setAiLoading] = useState(false);
-
+    
     const [ingredients, setIngredients] = useState("");
     const [recipes, setRecipes] = useState([]);
     const [loading, setLoading] = useState(false);
     const [searched, setSearched] = useState(false);
     const { isSignedIn } = useAuth();
+    
+    const [aiRecipe, setAiRecipe] = useState("");
+    const [aiLoading, setAiLoading] = useState(false);
+    const [note, setNote] = useState("");
 
 
     useEffect(() => {
@@ -72,7 +74,22 @@ export default function SearchForm() {
         setLoading(true);
         setAiRecipe("")
 
-        const res = await fetch(`/api/search?ingredients=${ingredients}&dish=${dish}&diet=${diet}&exclude=${exclude}&allergies=${allergies.join(",")}`);
+        let search = { ingredients, dish, diet, exclude, allergies };
+
+        if (note) {
+
+            const noteRes = await fetch(`/api/note?note=${note}&ingredients=${ingredients}&dish=${dish}&diet=${diet}&exclude=${exclude}&allergies=${allergies.join(".")}`);
+
+            search = await noteRes.json();
+
+            setIngredients(search.ingredients);
+            setDish(search.dish);
+            setDiet(search.diet);
+            setExclude(search.exclude);
+            setAllergies(search.allergies);
+        }
+
+        const res = await fetch(`/api/search??ingredients=${search.ingredients}&dish=${search.dish}&diet=${search.dish}&diet=${search.diet}&exclude=${search.exclude}&allergies=${search.allergies.join(",")}`);
 
         const data = await res.json();
         setLoading(false);
@@ -141,6 +158,11 @@ export default function SearchForm() {
 
             {/* save preferences */}
             {isSignedIn && <button type="button" onClick={savePreferences} className="mb-4 text-sm border rounded px-3 py-1 cursor-pointer">save preferences</button>}
+
+            {/* AI note */}
+            <textarea value={note} onChange={(event) => setNote(event.target.value)} rows={2} placeholder="optional note for AI" className="block w-full border rounded px-3 py-2 mb-1" />
+            
+            <p className="mb-4 text-xs">This note does adds few seconds of delay</p>
 
             {/* ingredients */}
             <input value={ingredients} onChange={(event) =>
