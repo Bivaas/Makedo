@@ -29,6 +29,7 @@ export default function SearchForm() {
     const [aiRecipe, setAiRecipe] = useState("");
     const [aiLoading, setAiLoading] = useState(false);
     const [note, setNote] = useState("");
+    const [onlyHave, setOnlyHave] = useState(false);
 
 
     useEffect(() => {
@@ -68,6 +69,7 @@ export default function SearchForm() {
         setAiRecipe(data.recipe);
     }
 
+
     async function handleSubmit(event) {
 
         event.preventDefault();
@@ -89,7 +91,7 @@ export default function SearchForm() {
             setAllergies(search.allergies);
         }
 
-        const res = await fetch(`/api/search??ingredients=${search.ingredients}&dish=${search.dish}&diet=${search.dish}&diet=${search.diet}&exclude=${search.exclude}&allergies=${search.allergies.join(",")}`);
+        const res = await fetch(`/api/search?ingredients=${search.ingredients}&dish=${search.dish}&diet=${search.diet}&exclude=${search.exclude}&allergies=${search.allergies.join(",")}&onlyHave=${onlyHave}`);
 
         const data = await res.json();
         setLoading(false);
@@ -101,7 +103,7 @@ export default function SearchForm() {
             return;
         } 
 
-        setRecipes(data.results);
+        setRecipes(onlyHave ? data.results.filter((recipe) => recipe.missedIngredientCount === 0) : data.results);
         setSearched(true);
     }
 
@@ -148,13 +150,23 @@ export default function SearchForm() {
 
             </div>
 
-            {/* swap toggle */}
-            <label className="block mb-4 text-sm">
+             {/* swap toggle */}
+            <label className="block text-sm py-5">
 
                 <input type="checkbox" checked={showSwaps} onChange={() => setShowSwaps(!showSwaps)} className="mr-1" />
                 swap suggestions
 
+            </label> 
+
+            {/* only what I have */}
+            <label className="block mb-4 text-sm">
+
+                <input type="checkbox" checked={onlyHave} onChange={() => setOnlyHave(!onlyHave)} className="mr-1"/> 
+                only what I have
+
             </label>
+
+
 
             {/* save preferences */}
             {isSignedIn && <button type="button" onClick={savePreferences} className="mb-4 text-sm border rounded px-3 py-1 cursor-pointer">save preferences</button>}
