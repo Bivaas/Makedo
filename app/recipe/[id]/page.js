@@ -1,5 +1,6 @@
 import Favourites from "../../Favourites";
 import Servings from "../../Servings";
+import AskChef from "../../AskChef";
 
 export const instant = false;
 
@@ -39,6 +40,9 @@ export default async function RecipePage({ params }) {
                 ))}
 
             </ol>
+
+            <AskChef title={recipe.title} ingredients={recipe.extendedIngredients.map((ingredient) => ingredient.original).join(",")} 
+            steps ={recipe.analyzedInstructions.flatMap((group) => group.steps).map((step) => step.step).join(" ")} />
 
         </main>
 
