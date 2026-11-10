@@ -30,6 +30,8 @@ export default function SearchForm() {
     const [aiLoading, setAiLoading] = useState(false);
     const [note, setNote] = useState("");
     const [onlyHave, setOnlyHave] = useState(false);
+    const [allResults, setAllResults ] = useState(false);
+    const [judgeLoading, setJudgeLoading] = useState(false);
 
 
     useEffect(() => {
@@ -69,6 +71,23 @@ export default function SearchForm() {
         setAiRecipe(data.recipe);
     }
 
+    // AI judge ingredients
+    async function askJudge() {
+
+        setJudgeLoading(true);
+
+        const list = allResults.map((recipe) => 
+            `${recipe.title} (missing: ${recipe.missedIngredients.map((item) => item.name)
+                .join(", ")})`).join("; ");
+
+        const res = await fetch("/api/judge", { method: "POST", body: JSON.stringify ({ ingredients, recipes: list })});
+
+        const data = await res.json();
+
+        setJudgeLoading(false);
+        setJudge(data.answer);
+    }
+
 
     async function handleSubmit(event) {
 
@@ -103,7 +122,10 @@ export default function SearchForm() {
             return;
         } 
 
+        setAllResults(data.results);
+        setJudge("");
         setRecipes(onlyHave ? data.results.filter((recipe) => recipe.missedIngredientCount === 0) : data.results);
+
         setSearched(true);
     }
 
@@ -187,7 +209,21 @@ export default function SearchForm() {
 
             {loading && <p className="mt-4">Searching...</p>}
 
-            {searched && !loading && recipes.length === 0 && <p className="mt-5">no recipes found... try different ingredients </p>}
+            {searched && !loading && recipes.length === 0 && <p className="mt-5">no recipes found ... try with different ingredients </p>}
+
+            {onlyHave && searched && !loading && recipes.length === 0 && (
+
+                <div className="mt-4">
+
+                    <button type="button" onClick={askJudge} className="border rounded px-4 py-2 bg=[#e0afa0]">ask AI if any still works</button>
+
+                    {judgeLoading && <p className="mt-2 text-sm">AI is checking something ...</p>}
+
+                    <p className="mt-4 whitespace-pre-line">{judge}</p>
+
+                </div>
+            )}
+
 
             {/* AI */}
             {searched && !!loading && recipe.length === 0 && (
