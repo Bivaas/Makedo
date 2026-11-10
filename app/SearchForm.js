@@ -133,6 +133,12 @@ export default function SearchForm() {
 
         <form onSubmit={handleSubmit}>
 
+            {/* filters */}
+            <div className="border rounded p-4 mb-6">
+
+            <p className="mb-3 font-semibold">filters</p>
+            
+
             {/* dish name */}
             <input value={dish} onChange={( event ) =>
 
@@ -158,7 +164,7 @@ export default function SearchForm() {
                 />
 
             {/* allergy checkbox */}
-            <div className="mb-1 flex flex-wrap gap-3 text-sm">
+            <div className="mb-4 flex flex-wrap gap-3 text-sm">
 
                     {ALLERGIES.map((allergy) => (
                         <label key={allergy}>
@@ -181,7 +187,7 @@ export default function SearchForm() {
             </label> 
 
             {/* only what I have */}
-            <label className="block mb-4 text-sm">
+            <label className="block mb-2 text-sm">
 
                 <input type="checkbox" checked={onlyHave} onChange={() => setOnlyHave(!onlyHave)} className="mr-1"/> 
                 only what I have
@@ -197,6 +203,8 @@ export default function SearchForm() {
             <textarea value={note} onChange={(event) => setNote(event.target.value)} rows={2} placeholder="optional note for AI" className="block w-full border rounded px-3 py-2 mb-1" />
             
             <p className="mb-4 text-xs">This note does adds few seconds of delay</p>
+
+            </div>
 
             {/* ingredients */}
             <input value={ingredients} onChange={(event) =>
