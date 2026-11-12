@@ -1,6 +1,6 @@
 export async function GET(request) {
 
-    const note = request.nextURl.searchParams.get("note");
+    const note = request.nextUrl.searchParams.get("note");
     const ingredient = request.nextUrl.searchParams.get("ingredients");
     const dish = request.nextUrl.searchParams.get("dish");
     const diet = request.nextUrl.searchParams.get("diet");

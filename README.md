@@ -11,25 +11,28 @@ You can also type a dish name you would want to make (like pizza) and if you lik
 - filters for diet and allergies
 - cant have option in recipe
 - AI additional note (filter)
+- AI recipe when no recipes are found (or when spoonacular hits API limit)
 - ask the chef for recipe related question
 - sign in with google acc and save favourite / preference
 
 ## How it works
 
-I used spoonacular's complexSearch API with current filters and the recipe page fetches all information. All AI related features like swaps, note, ask the chef uses Nvidia nemotron-3-30b-a3b model at 4000 tokens. Clerk is also used (in development mode) for storing user favorite and preferences. 
+I used spoonacular's complexSearch API with current filters and the recipe page fetches all information about recipe info. All AI related features like swaps, note, ask the chef, AI check which uses Nvidia nemotron-3.5-lightning-30b-a3b model at different tokens and thinking on / off. Clerk is also used (in development mode) to handle login and user's favourites and preferences are stored in MongoDB. 
 
-## Limitationss
+## Limitations
 
 The main limitation is using an API (free) for getting the recipes. Spoonacular free plan includes only 50 points per day which can be ~25 searches a day or lower depending on what filters are used. The AI features also adds few seconds or minutes of delay and AI answers or allergy filter may not be completely accurate for some individuals. 
 
 ## Used
 
+'''
 Toast: https://react-hot-toast.com/
 clerk: https://clerk.com/
 Recipes: https://spoonacular.com/food-api
 Database: https://www.mongodb.com/atlas
 Color palette: https://coolors.co/palettes/popular/simple
 AI: https://build.nvidia.com/
+'''
 
 ## Use of AI
 
