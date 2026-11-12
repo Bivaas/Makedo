@@ -1,7 +1,7 @@
 export async function GET(request) {
 
     const ingredients = request.nextUrl.searchParams.get("ingredients");
-    const dish = request.nextURL.searchParams.get("dish");
+    const dish = request.nextUrl.searchParams.get("dish");
     const diet = request.nextUrl.searchParams.get("diet");
     const avoid = request.nextUrl.searchParams.get("avoid");
 
@@ -19,9 +19,10 @@ export async function GET(request) {
 
             model: "nvidia/nemotron-3.5-lightning-30b-a3b",
 
-            messages: [{role:"user", content: `write one simple home recipe using mostly these ingredients: ${ingredients}. Dish wanted: ${dish}. Diet: ${diet}. Never use: ${avoid}. Start with the recipe name then ingredients then numbered steps. Keep it short and write un plain text`}],
+            messages: [{role:"user", content: `write one simple home recipe using mostly these ingredients: ${ingredients}. Dish wanted: ${dish}. Diet: ${diet}. Never use: ${avoid}. Start with the recipe name, cooking time, ingredients and amount in clear 5-10 numbered steps. Keep it short, write in plain text WITHOUT any markdown !!`}],
             
-            max_tokens: 4000,
+            max_tokens: 15000,
+            chat_template_kwargs: { enable_thinking: false },
         }),
     });
 

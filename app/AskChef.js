@@ -25,7 +25,7 @@ export default function AskChef ({ title, ingredients, steps }) {
 
         <div className="mt-8">
 
-            <h2 className="text-xl font-xl mb-2">ask the chef</h2>
+            <h2 className="text-xl font-xl mb-2">ask the chef:</h2>
 
             <textarea value={question} onChange={(event) => setQuestion(event.target.value)} rows={2} placeholder="ask any question to a professional chef" className="black w-full border rounded px-3 py-2 mb-2" />
 

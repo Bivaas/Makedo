@@ -34,6 +34,24 @@ export default function SearchForm() {
     const [judge, setJudge] = useState("");
     const [judgeLoading, setJudgeLoading] = useState(false);
 
+    const [typing, setTyping] = useState("");
+    const tags = ingredients.split(",").map((tag) => tag.trim()).filter((tag) => tag);
+
+
+    function addTag(event) {
+
+        if (event.key !== "Enter" || !typing) return;
+
+        event.preventDefault();
+        setIngredients([...tags, typing.trim()].join(","));
+        setTyping("");
+    }
+
+    function removeTag(tag) {
+
+        setIngredients(tags.filter((item) => item !== tag).join(","));
+    }
+
 
     useEffect(() => {
 
@@ -207,11 +225,27 @@ export default function SearchForm() {
 
             </div>
 
-            {/* ingredients */}
-            <input value={ingredients} onChange={(event) =>
+            {/* entered ingredient */}
+            <div className="mb-2 flex flex-wrap gap-2">
 
-                setIngredients(event.target.value)}
-                placeholder="ingredients you have"
+                {tags.map((tag) => (
+
+                    <span key={tag} className="border rounded px-2 py-1 bg-[#e0afa0]">
+                        
+                        {tag}
+                        <button type="button" onClick={() => removeTag(tag)} className="ml-2 cursor-pointer">x</button>
+                    
+                    </span>
+                ))}
+
+            </div>
+
+            {/* ingredients */}
+            <input value={typing} onChange={(event) =>
+
+                setTyping(event.target.value)}
+                onKeyDown={addTag}
+                placeholder="ingredients you have & press Enter"
                 className="w-72 border rounded px-3 py-2" />
 
             <button type="submit" className="ml-2 border rounded px-4 py-2 bg-[#e0afa0]">Search</button>

@@ -29,7 +29,7 @@ export default function Servings({ servings, ingredients }) {
                 
                 {ingredients.map(( ingredient, index) => (
 
-                    <li key={index}>{Math.round(ingredient.amound * people / servings * 100) / 100} {ingredients.unit} {ingredient.name}</li>
+                    <li key={index}>{ingredient.amount ? `${Math.round(ingredient.amount * people / servings * 100) / 100} ${ingredient.unit} ${ingredient.name}` : ingredient.original} </li>
 
                 ))}
 
