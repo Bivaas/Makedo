@@ -4,13 +4,32 @@ A recipe finder for when we open our fridge, see the available ingredients but d
 
 You can also type a dish name you would want to make (like pizza) and if you like it, you could save it to favourites and your filter preference if you're signed in.
 
+## Features
+
+- search for top 10 possible recipes with available ingredients
+- dish name search for things we want to make
+- filters for diet and allergies
+- cant have option in recipe
+- AI additional note (filter)
+- ask the chef for recipe related question
+- sign in with google acc and save favourite / preference
+
+## How it works
+
+I used spoonacular's complexSearch API with current filters and the recipe page fetches all information. All AI related features like swaps, note, ask the chef uses Nvidia nemotron-3-30b-a3b model at 4000 tokens. Clerk is also used (in development mode) for storing user favorite and preferences. 
+
+## Limitationss
+
+The main limitation is using an API (free) for getting the recipes. Spoonacular free plan includes only 50 points per day which can be ~25 searches a day or lower depending on what filters are used. The AI features also adds few seconds or minutes of delay and AI answers or allergy filter may not be completely accurate for some individuals. 
+
 ## Used
 
-- react-hot-toast
-- clerk
-- spoonacular
-- MongoDB
-- color palette (https://coolors.co/palettes/popular/simple)
+Toast: https://react-hot-toast.com/
+clerk: https://clerk.com/
+Recipes: https://spoonacular.com/food-api
+Database: https://www.mongodb.com/atlas
+Color palette: https://coolors.co/palettes/popular/simple
+AI: https://build.nvidia.com/
 
 ## Getting Started
 
@@ -35,4 +54,4 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
 ## Use of AI
 
-I used AI during initial planning of the project to see how difficult or simple the project can be. It then recommended for me to use spoonacular API. I have also used AI for debugging, fixing error and getting project feedback.
+I used AI during initial planning of the project to find spoonacular API, finding right AI model for this project (high parameter vs faster) and to check if models has been retired or not. I have also used AI for debugging, fixing error and getting project feedback on improvements.

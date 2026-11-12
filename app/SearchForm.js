@@ -30,7 +30,8 @@ export default function SearchForm() {
     const [aiLoading, setAiLoading] = useState(false);
     const [note, setNote] = useState("");
     const [onlyHave, setOnlyHave] = useState(false);
-    const [allResults, setAllResults ] = useState(false);
+    const [allResults, setAllResults ] = useState([]);
+    const [judge, setJudge] = useState("");
     const [judgeLoading, setJudgeLoading] = useState(false);
 
 
@@ -234,7 +235,7 @@ export default function SearchForm() {
 
 
             {/* AI */}
-            {searched && !!loading && recipe.length === 0 && (
+            {searched && !loading && recipes.length === 0 && (
 
                 <div className="mt-4">
 
