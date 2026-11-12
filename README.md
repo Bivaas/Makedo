@@ -31,6 +31,10 @@ Database: https://www.mongodb.com/atlas
 Color palette: https://coolors.co/palettes/popular/simple
 AI: https://build.nvidia.com/
 
+## Use of AI
+
+I used AI during initial planning of the project to find spoonacular API, finding right AI model for this project (high parameter vs faster) and to check if models has been retired or not. I have also used AI for debugging, fixing error and getting project feedback on improvements.
+
 ## Getting Started
 
 First, run the development server:
@@ -51,7 +55,10 @@ You can start editing the page by modifying `app/page.js`. The page auto-updates
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Images
 
-## Use of AI
+*searching possible recipes with ingredients I have*
+![Screenshot](uploads/hmsearch.PNG)
 
-I used AI during initial planning of the project to find spoonacular API, finding right AI model for this project (high parameter vs faster) and to check if models has been retired or not. I have also used AI for debugging, fixing error and getting project feedback on improvements.
+*click on recipe I liked*
+![Screenshot](uploads/rcp.PNG)
